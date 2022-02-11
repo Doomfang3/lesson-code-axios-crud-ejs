@@ -1,7 +1,6 @@
 // routes/movie-characters.routes.js
 
-const express = require('express');
-const router = express.Router();
+const router = require("express").Router();
 const ApiService = require('./../services/api.service');
 const apiService = new ApiService();
 
@@ -11,6 +10,9 @@ router.get('/movie-characters/list', (req, res) => {
   apiService
     .getAllCharacters()
     .then((response) => {
+
+      // res.json(response.data);
+
       res.render('pages/characters-list', { characters: response.data })
     })
     .catch(error => console.log(error));
@@ -30,6 +32,9 @@ router.post('/movie-characters/create', (req, res) => {
   apiService
     .createCharacter(characterInfo)
     .then((response) => {
+
+      // res.json(response.data);
+
       res.redirect('/movie-characters/list');
     })
     .catch((error) => console.log(error));
@@ -43,6 +48,9 @@ router.get('/movie-characters/edit/:id', (req, res) => {
   apiService
     .getOneCharacter(characterId)
     .then((response) => {
+
+      // res.json(response.data);
+
       res.render('pages/edit-character-form', { character: response.data });
     })
     .catch(error => console.log(error));
@@ -57,6 +65,9 @@ router.post('/movie-characters/edit/:id', (req, res) => {
   apiService
     .editCharacter(characterId, characterInfo)
     .then((response) => {
+      
+      // res.json(response.data);
+
       res.redirect('/movie-characters/list');
   	})
     .catch((error) => console.log(error));
@@ -69,7 +80,12 @@ router.get('/movie-characters/delete/:id', (req, res) => {
 
   apiService
     .deleteCharacter(characterId)
-    .then((response) => res.redirect(`/movie-characters/list`))
+    .then((response) => {
+    
+      // res.json(response.data);
+      
+      res.redirect(`/movie-characters/list`);
+    })
     .catch(error => console.log(error));
 });
 
